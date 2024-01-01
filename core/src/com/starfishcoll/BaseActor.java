@@ -21,7 +21,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
  * Part of Game FW   implemented during creating Starfish Collector game
- *   Extend functionality of the LibGDX Actor class
+ *   Extended functionality of the LibGDX Actor class
+ *
  *        Unique sprite classes inherit from this BaseActor class extending Actor of libGDX, with full facility package.
  *          Class features:
  *          - set size and position of actor and add it to main stage
@@ -37,7 +38,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class BaseActor extends Group            // Group extends Actor...
 {
     private static String packageName = "com.starfishcoll.";
-    private static Rectangle worldBounds;       // the boundary of game world - static
+    private static Rectangle worldBounds;       // the boundaries of the game world - static
 
     private Animation<TextureRegion> animation;     // animation with images in an array
     protected float elapsedTime;        // to control animation time
@@ -46,7 +47,7 @@ public class BaseActor extends Group            // Group extends Actor...
 
     private Vector2 velocityVec;        // movement vectors
     private Vector2 accelerationVec;
-    private float maxSpeed;             // movable objects will set these values in their constructors
+    private float maxSpeed;             // movable objects will set the following 3 values in their constructors
     private float acceleration;
     private float deceleration;
 
@@ -54,13 +55,14 @@ public class BaseActor extends Group            // Group extends Actor...
 
 
     // CONSTRUCTOR
-    public BaseActor(float x, float y, Stage s)
+    // @param:  Position, Stage
+    public BaseActor(float x, float y, Stage stage)
     {
-        // call constructor from Actor class
+        // call constructor of Actor/Group superclass
         super();
         // perform additional initialization tasks
         setPosition(x,y);       // Actor method
-        s.addActor(this);       // add to Stage
+        stage.addActor(this);       // add itself to Stage
 
         animation = null;
         elapsedTime = 0;
@@ -76,6 +78,7 @@ public class BaseActor extends Group            // Group extends Actor...
 
 
     // HANDLING ACTORS AS A LIST
+    // @param:  Stage, Classname
     // This method gives the list of actors of a given type on a given stage
     // Typical Actor method, but can not be linked to any Actor object -> it should be static
     public static ArrayList<BaseActor> getList(Stage stage, String className)
@@ -96,7 +99,7 @@ public class BaseActor extends Group            // Group extends Actor...
         return list;
     }
 
-    // Count the number of instances of a given class
+    // Count the number of instances of a given class on a given stage
     public static int count(Stage stage, String className)
     {
         return getList(stage, className).size();
@@ -122,7 +125,9 @@ public class BaseActor extends Group            // Group extends Actor...
         return worldBounds;
     }
 
-    // KEEP ACTOR WITHIN WORLD BOUNDS
+
+    // KEEP ACTOR WITHIN WORLD BOUNDS - 2 versions
+
     // 'A' version: Check all 4 edges and adjust if necessary, uses worldBounds static Rectangle
     public void boundToWorld()
     {
@@ -234,7 +239,7 @@ public class BaseActor extends Group            // Group extends Actor...
         return anim;
     }
 
-    // Version 3 for convenience: a special method for game objects that do not require an animation but has only 1 image
+    // Version 3 for convenience: a special method for game objects that actually do not require an animation, because they have only 1 image
     public Animation<TextureRegion> loadTexture(String fileName)
     {
         String[] fileNames = new String[1];         // array with 1 image and then call anim method version 1
@@ -278,7 +283,7 @@ public class BaseActor extends Group            // Group extends Actor...
 
     public void setSpeed(float speed)
     {
-        // if length is zero, then set motion angle acc. to acceleration angle
+        // if length is zero set motion angle acc. to acceleration angle
         if (velocityVec.len() == 0)
         {
             velocityVec.set(speed, 0);
@@ -397,7 +402,7 @@ public class BaseActor extends Group            // Group extends Actor...
         return Intersector.overlapConvexPolygons( poly1, poly2 );   // static method for checking overlap between polygons
     }
 
-    // Special method for avoiding overlap with solid obstacles:
+    // Special method in order to avoid overlap with solid obstacles:
     // it calculates the minimal distance the character needs to be moved so that there will be no overlap
     // then moves character with this vector
     // return value: null if no overlap, otherwise the normal vector of direction

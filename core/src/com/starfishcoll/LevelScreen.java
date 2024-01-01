@@ -124,7 +124,7 @@ public class LevelScreen extends BaseScreen
 	}
 
 	@Override
-	public void update (float dt)		// called from render() in GameBeta
+	public void update (float dt)		// called from render() in BaseScreen
 	{
 		// show the actual number of starfishes left - .setScale can be used to change size here
 		starfishLabel.setText("Starfish Left: " + BaseActor.count(mainStage, "Starfish"));
@@ -172,7 +172,7 @@ public class LevelScreen extends BaseScreen
 		if ( BaseActor.count(mainStage, "Starfish") == 0 && !win )
 		{
 			win = true;
-			BaseActor youWinMessage = new BaseActor(0, 0, uiStage);	// drawn on the stage with fix camera
+			BaseActor youWinMessage = new BaseActor(0, 0, uiStage);	// draw it on the stage with fix camera
 			youWinMessage.loadTexture("you-win.png");
 			youWinMessage.centerAtPosition(400, 300);
 			youWinMessage.setOpacity(0);

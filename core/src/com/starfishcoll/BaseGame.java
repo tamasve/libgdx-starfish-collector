@@ -23,7 +23,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
  */
 
 /**
- * Part of Game FW   implemented during creating Starfish Collector game
+ * Part of Game FW,   implemented during creating Starfish Collector game
  * The BaseGame class is mainly responsible for storing a static reference to the Game object initialized by the
  * Launcher class so that the Screen-derived classes can easily access and switch the currently active screen.
  * Another task is handling discrete user input -
@@ -45,6 +45,7 @@ public abstract class BaseGame extends Game
         game = this;
     }
 
+    @Override
     public void create()
     {
         // prepare for multiple classes/stages to receive discrete input
@@ -73,7 +74,7 @@ public abstract class BaseGame extends Game
         // initialize text button style
         textButtonStyle = new TextButtonStyle();
         Texture buttonTex = new Texture( Gdx.files.internal("button.png") );
-        NinePatch buttonPatch = new NinePatch(buttonTex, 24,24,24,24);  // image with borders for fine alingment
+        NinePatch buttonPatch = new NinePatch(buttonTex, 24,24,24,24);  // image with borders for fine alignment
         textButtonStyle.up = new NinePatchDrawable( buttonPatch );      // a NinePatch that implements Drawable
         textButtonStyle.font = labelStyle.font;
         textButtonStyle.fontColor = Color.GRAY;

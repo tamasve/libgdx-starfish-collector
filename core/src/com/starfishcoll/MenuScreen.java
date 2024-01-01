@@ -81,6 +81,7 @@ public class MenuScreen extends BaseScreen
         uiTable.add(quitButton);
     }
 
+    @Override
     public void update(float dt)        // 1 task only: if "S" is pressed create LevelScreen and set it as active
     {
         /*if (Gdx.input.isKeyPressed(Keys.S))   StarfishGame.setActiveScreen( new LevelScreen() );*/

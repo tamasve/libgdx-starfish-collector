@@ -73,7 +73,7 @@ public abstract class BaseScreen implements Screen, InputProcessor
     public void show()
     {
         InputMultiplexer im = (InputMultiplexer) Gdx.input.getInputProcessor();     // returns the currently set InputProcessor (... in BaseGame)
-        im.addProcessor(this);
+        im.addProcessor(this);      // delegate it and the stages to the event controller - chain InputProcessors (an event will run through each of them in order...)
         im.addProcessor(uiStage);
         im.addProcessor(mainStage);
     }

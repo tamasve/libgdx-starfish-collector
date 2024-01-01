@@ -25,7 +25,7 @@ public class Turtle extends BaseActor
     }
 
     @Override
-    public void act(float dt)       // override ActorBeta's action method but of course run the original at first...
+    public void act(float dt)       // override BaseActor's action method but of course run the original at first...
     {
         super.act(dt);
 
